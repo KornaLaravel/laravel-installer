@@ -398,7 +398,8 @@ class NewCommand extends Command
                     'react' => 'React with Inertia',
                     'vue' => 'Vue with Inertia',
                     'api' => 'API only',
-                ]
+                ],
+                required: 'The Breeze stack is required.',
             ));
         }
 
@@ -438,7 +439,8 @@ class NewCommand extends Command
                 options: [
                     'livewire' => 'Livewire',
                     'inertia' => 'Vue with Inertia',
-                ]
+                ],
+                required: 'The Jetstream stack is required.',
             ));
         }
 
