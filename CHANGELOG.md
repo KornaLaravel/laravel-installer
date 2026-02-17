@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/installer/compare/v5.24.5...master)
+## [Unreleased](https://github.com/laravel/installer/compare/v5.24.6...master)
+
+## [v5.24.6](https://github.com/laravel/installer/compare/v5.24.5...v5.24.6) - 2026-02-17
+
+* Add support for Svelte Starter Kit by [@WendellAdriel](https://github.com/WendellAdriel) in https://github.com/laravel/installer/pull/466
 
 ## [v5.24.5](https://github.com/laravel/installer/compare/v5.24.4...v5.24.5) - 2026-02-11
 
