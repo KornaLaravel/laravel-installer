@@ -131,11 +131,8 @@ class NewCommand extends Command
         parent::interact($input, $output);
 
         $this->configurePrompts($input, $output);
-
         $this->displayHeader($output);
-
         $this->ensureExtensionsAreAvailable($input, $output);
-
         $this->checkForUpdate($input, $output);
 
         if (! $input->getArgument('name')) {
@@ -166,22 +163,78 @@ class NewCommand extends Command
         }
 
         if (! $this->usingStarterKit($input)) {
+            $useStarterKit = confirm('Do you want to use a starter kit?', default: false);
+
+            if (! $useStarterKit) {
+                $stack = select(
+                    label: 'Which frontend stack do you want to build on?',
+                    options: [
+                        'blade' => 'Blade',
+                        'react' => 'React',
+                        'svelte' => 'Svelte',
+                        'vue' => 'Vue',
+                        'livewire' => 'Livewire',
+                    ],
+                    info: fn ($value) => match ($value) {
+                        'blade' => 'No additional frontend scaffolding',
+                        'react' => 'Laravel, Inertia, React, Tailwind',
+                        'svelte' => 'Laravel, Inertia, Svelte, Tailwind',
+                        'vue' => 'Laravel, Inertia, Vue, Tailwind',
+                        'livewire' => 'Laravel, Livewire, Tailwind',
+                        default => '',
+                    },
+                    default: 'blade',
+                    scroll: 10,
+                );
+
+                match ($stack) {
+                    'react' => $input->setOption('react', true),
+                    'svelte' => $input->setOption('svelte', true),
+                    'vue' => $input->setOption('vue', true),
+                    'livewire' => $input->setOption('livewire', true),
+                    default => null,
+                };
+
+                if (! $input->getOption('database')) {
+                    $input->setOption('database', 'sqlite');
+                }
+
+                if (! $input->getOption('phpunit')) {
+                    $input->setOption('pest', true);
+                }
+
+                if (! $input->getOption('no-boost')) {
+                    $input->setOption('boost', true);
+                }
+
+                if (! $input->getOption('no-node') &&
+                    ! $input->getOption('pnpm') &&
+                    ! $input->getOption('bun') &&
+                    ! $input->getOption('yarn')) {
+                    $input->setOption('npm', true);
+                }
+
+                $input->setOption('no-authentication', true);
+            }
+        }
+
+        if (($useStarterKit ?? null) !== false && ! $this->usingStarterKit($input)) {
             match (select(
-                label: 'Which starter kit would you like to install?',
+                label: 'Which frontend stack should your starter kit use?',
                 options: [
-                    'none' => 'None',
+                    // 'none' => 'None',
                     'react' => 'React',
                     'svelte' => 'Svelte',
                     'vue' => 'Vue',
                     'livewire' => 'Livewire',
                 ],
-                default: 'none',
+                default: 'react',
             )) {
                 'react' => $input->setOption('react', true),
                 'svelte' => $input->setOption('svelte', true),
                 'vue' => $input->setOption('vue', true),
                 'livewire' => $input->setOption('livewire', true),
-                default => null,
+                default => 'react',
             };
 
             if ($this->usingLaravelStarterKit($input)) {
@@ -190,13 +243,11 @@ class NewCommand extends Command
                     options: [
                         'laravel' => "Laravel's built-in authentication",
                         'workos' => 'WorkOS (Requires WorkOS account)',
-                        'none' => 'No authentication scaffolding',
                     ],
                     default: 'laravel',
                 )) {
                     'laravel' => $input->setOption('workos', false),
                     'workos' => $input->setOption('workos', true),
-                    'none' => $input->setOption('no-authentication', true),
                     default => null,
                 };
             }
@@ -1093,7 +1144,7 @@ class NewCommand extends Command
             $input,
             $output,
             workingPath: $directory,
-            taskLabel: 'Setting up Laravel Boost',
+            taskLabel: 'Setting up Laravel Boost for AI assisted coding',
         );
 
         $this->commitChanges('Install Laravel Boost', $directory, $input, $output);
