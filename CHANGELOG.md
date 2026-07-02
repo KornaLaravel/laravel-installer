@@ -1,6 +1,20 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/installer/compare/v5.28.1...master)
+## [Unreleased](https://github.com/laravel/installer/compare/v5.29.0...master)
+
+## [v5.29.0](https://github.com/laravel/installer/compare/v5.28.1...v5.29.0) - 2026-07-02
+
+* Adds a no-node option to skip installing and building NPM dependencies entirely by [@tonysm](https://github.com/tonysm) in https://github.com/laravel/installer/pull/526
+* GitHub Actions hardening by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/installer/pull/527
+* Bump actions/checkout from 4.3.1 to 6.0.3 in the github-actions group by [@dependabot](https://github.com/dependabot)[bot] in https://github.com/laravel/installer/pull/528
+* Add Dependabot cooldown of 5 days by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/installer/pull/529
+* Enable Dependabot auto-merge by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/installer/pull/530
+* Fix reusable workflow pin to match granted permissions by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/installer/pull/531
+* Bump shivammathur/setup-php from 2.37.1 to 2.37.2 in the github-actions group by [@dependabot](https://github.com/dependabot)[bot] in https://github.com/laravel/installer/pull/533
+* Bump actions/checkout from 6.0.3 to 7.0.0 in the github-actions group by [@dependabot](https://github.com/dependabot)[bot] in https://github.com/laravel/installer/pull/537
+* Respect --no-interaction flag when attaching TTY to child processes by [@joetannenbaum](https://github.com/joetannenbaum) in https://github.com/laravel/installer/pull/536
+* Use Prompts callout for the "application ready" output by [@joetannenbaum](https://github.com/joetannenbaum) in https://github.com/laravel/installer/pull/535
+* Quick onboard by [@taylorotwell](https://github.com/taylorotwell) in https://github.com/laravel/installer/pull/538
 
 ## [v5.28.1](https://github.com/laravel/installer/compare/v5.28.0...v5.28.1) - 2026-05-19
 
