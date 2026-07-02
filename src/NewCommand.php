@@ -162,6 +162,27 @@ class NewCommand extends Command
             );
         }
 
+        // Set some quick options...
+        if (! $input->getOption('database')) {
+            $input->setOption('database', 'sqlite');
+        }
+
+        if (! $input->getOption('phpunit')) {
+            $input->setOption('pest', true);
+        }
+
+        if (! $input->getOption('no-boost')) {
+            $input->setOption('boost', true);
+        }
+
+        if (! $input->getOption('no-node') &&
+            ! $input->getOption('pnpm') &&
+            ! $input->getOption('bun') &&
+            ! $input->getOption('yarn')) {
+            $input->setOption('npm', true);
+        }
+
+        // Starter kit questions...
         if (! $this->usingStarterKit($input)) {
             $useStarterKit = confirm('Do you want to use a starter kit?', default: false);
 
@@ -195,29 +216,11 @@ class NewCommand extends Command
                     default => null,
                 };
 
-                if (! $input->getOption('database')) {
-                    $input->setOption('database', 'sqlite');
-                }
-
-                if (! $input->getOption('phpunit')) {
-                    $input->setOption('pest', true);
-                }
-
-                if (! $input->getOption('no-boost')) {
-                    $input->setOption('boost', true);
-                }
-
-                if (! $input->getOption('no-node') &&
-                    ! $input->getOption('pnpm') &&
-                    ! $input->getOption('bun') &&
-                    ! $input->getOption('yarn')) {
-                    $input->setOption('npm', true);
-                }
-
                 $input->setOption('no-authentication', true);
             }
         }
 
+        // Starter kit frontend stack...
         if (($useStarterKit ?? null) !== false && ! $this->usingStarterKit($input)) {
             match (select(
                 label: 'Which frontend stack should your starter kit use?',
@@ -276,6 +279,7 @@ class NewCommand extends Command
             }
         }
 
+        // Testing framework...
         if (! $input->getOption('phpunit') && ! $input->getOption('pest')) {
             $input->setOption('pest', select(
                 label: 'Which testing framework do you prefer?',
@@ -284,6 +288,7 @@ class NewCommand extends Command
             ) === 'Pest');
         }
 
+        // Boost...
         if (! $input->getOption('boost') && ! $input->getOption('no-boost')) {
             $input->setOption('boost', confirm(
                 label: 'Do you want to install Laravel Boost to improve AI assisted coding?',
