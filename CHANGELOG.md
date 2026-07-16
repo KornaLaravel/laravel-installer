@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/installer/compare/v5.30.0...master)
+## [Unreleased](https://github.com/laravel/installer/compare/v5.31.0...master)
+
+## [v5.31.0](https://github.com/laravel/installer/compare/v5.30.0...v5.31.0) - 2026-07-16
+
+* Add `laravel package` command by [@joetannenbaum](https://github.com/joetannenbaum) in https://github.com/laravel/installer/pull/546
+* Fallback old output when `Laravel\Prompts\callout()` function is not available by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/installer/pull/549
+* [5.x] Ensure `queue:listen` has `timeout=0` for Windows by [@jackbayliss](https://github.com/jackbayliss) in https://github.com/laravel/installer/pull/550
+* [5.x] Pass --no-node to starter kit installer hooks by [@jklejczyk](https://github.com/jklejczyk) in https://github.com/laravel/installer/pull/552
+* Match the starter kit workflow PHP version to the local machine by [@WendellAdriel](https://github.com/WendellAdriel) in https://github.com/laravel/installer/pull/553
 
 ## [v5.30.0](https://github.com/laravel/installer/compare/v5.29.0...v5.30.0) - 2026-07-02
 
